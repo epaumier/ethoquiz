@@ -1,4 +1,4 @@
-import { text, integer, sqliteTable } from "drizzle-orm/sqlite-core";
+import { text, integer, sqliteTable } from 'drizzle-orm/sqlite-core';
 
 export const quizzes = sqliteTable('quizzes', {
   id: integer('id').primaryKey({ autoIncrement: true }),
@@ -13,7 +13,9 @@ export const questions = sqliteTable('questions', {
   content: text('content').notNull().default('empty question'),
   media: text('text', { mode: 'json' }).$type<{ path: string }>(),
   isFreeForm: integer('is_free_form').default(0),
-  quizId: integer('quiz_id').notNull().references(() => quizzes.id),
+  quizId: integer('quiz_id')
+    .notNull()
+    .references(() => quizzes.id),
 });
 
 export type Question = typeof questions.$inferSelect;
@@ -21,15 +23,19 @@ export type Question = typeof questions.$inferSelect;
 export const answers = sqliteTable('answers', {
   id: integer('id').primaryKey({ autoIncrement: true }),
   content: text('content').notNull().default('empty answer'),
-  correct: integer('completed', {mode: 'boolean'}).notNull().default(false),
-  questionId: integer('question_id').notNull().references(() => questions.id),
+  correct: integer('completed', { mode: 'boolean' }).notNull().default(false),
+  questionId: integer('question_id')
+    .notNull()
+    .references(() => questions.id),
 });
 
-export type Answer = typeof questions.$inferSelect;
+export type Answer = typeof answers.$inferSelect;
 
 export const freeFormSubmissions = sqliteTable('free_form_submissions', {
   id: integer('id').primaryKey({ autoIncrement: true }),
-  questionId: integer('question_id').notNull().references(() => questions.id),
+  questionId: integer('question_id')
+    .notNull()
+    .references(() => questions.id),
   userSubmittedContent: text('content').notNull().default('empty answer'),
 });
 

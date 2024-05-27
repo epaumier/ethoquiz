@@ -7,7 +7,7 @@ export async function main<TSchema extends Record<string, unknown>, RunResult>(
 ) {
   await db
     .insert(quizzes)
-    .values([{ id: 1, title: 'Quizz 1' }])
+    .values([{ id: 1, title: 'Chats' }])
     .onConflictDoNothing();
 
   await db
@@ -111,7 +111,7 @@ export async function main<TSchema extends Record<string, unknown>, RunResult>(
     .leftJoin(questions, eq(answers.questionId, questions.id));
   // .where(eq(answers.questionId, 2));
 
-  console.log(result);
+  console.log('query.ts' + result);
 
   // console.log(result[0].questions === result[1].questions);
 }
