@@ -7,7 +7,7 @@ export async function main<TSchema extends Record<string, unknown>, RunResult>(
 ) {
   await db
     .insert(quizzes)
-    .values([{ id: 1, title: 'Chats' }])
+    .values([{ id: 1, title: 'Le chat' }])
     .onConflictDoNothing();
 
   await db

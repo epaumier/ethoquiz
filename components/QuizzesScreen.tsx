@@ -16,13 +16,12 @@ export default function QuizzesScreen({ navigation }) {
   }, []);
   return (
     <View style={tw.style('flex-1 items-center justify-around bg-white')}>
-      <Text style={tw.style('text-2xl bg-green-800 px-8 py-4 text-white rounded-lg')}>
-        Les quizz
-      </Text>
-      <View style={tw.style('flex flex-col gap-4')}>
+      <View style={tw.style('flex w-3/4 flex-col gap-4')}>
         {quizzesData.map((quiz) => (
           <Pressable key={quiz.id} onPress={() => navigation.navigate('Quiz', { quizId: quiz.id })}>
-            <Text style={tw.style('text-xl text-white bg-green-800 rounded-lg px-10 py-3')}>
+            <Text
+              style={tw.style('text-xl  text-center text-white bg-green-800 rounded-lg px-10 py-3')}
+            >
               {quiz.title}
             </Text>
           </Pressable>

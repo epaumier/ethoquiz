@@ -32,6 +32,9 @@
         "projectId": "7808ddc8-20b8-4833-8609-fd59406666e3"
       }
     },
-    "owner": "tedd2011"
+    "owner": "tedd2011",
+    "plugins": [
+      "expo-video"
+    ]
   }
 }
