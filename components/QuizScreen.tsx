@@ -1,22 +1,23 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { View, Pressable, Text, StatusBar, Image, Button } from 'react-native';
+import { ScrollView, View, Pressable, Text, StatusBar, Image, Button } from 'react-native';
 import tw from 'twrnc';
 import { readDb } from '../database/db';
 import { Question, questions, answers, Answer } from '../database/schema';
 import images from '../images';
 import { Video, ResizeMode } from 'expo-av';
+import { answersData, questionsData } from '../database/dummy';
 
 export default function QuizScreen({ route, navigation }) {
   const ref = useRef(null);
   const [status, setStatus] = React.useState({});
   const video = React.useRef(null);
   const { quizId } = route.params;
-  const [questionIndex, setQuestionIndex] = useState(2);
+  const [questionIndex, setQuestionIndex] = useState(0);
   const [errorCount, setErrorCount] = useState(0);
   const [isQuestionDone, setIsQuestionDone] = useState(false);
   const [choices, setChoices] = useState<number[]>([]);
-  const [questionsData, setQuestionsData] = useState<Question[]>([]);
-  const [answersData, setAnswersData] = useState<Answer[]>([]);
+  // const [questionsData, setQuestionsData] = useState<Question[]>([]);
+  // const [answersData, setAnswersData] = useState<Answer[]>();
 
   useEffect(() => {
     navigation.setOptions({
@@ -27,14 +28,14 @@ export default function QuizScreen({ route, navigation }) {
   }, [navigation, isQuestionDone]);
 
   useEffect(() => {
-    async function fetchDb() {
-      const db = await (await readDb()).select().from(questions);
-      const ad = await (await readDb()).select().from(answers);
+    // async function fetchDb() {
+    //   const db = await (await readDb()).select().from(questions);
+    //   const ad = await (await readDb()).select().from(answers);
 
-      setQuestionsData(db);
-      setAnswersData(ad);
-    }
-    fetchDb();
+    //   setQuestionsData(db);
+    //   setAnswersData(ad);
+    // }
+    // fetchDb();
     setIsQuestionDone(false);
     setErrorCount(0);
     setChoices([]);
@@ -56,7 +57,7 @@ export default function QuizScreen({ route, navigation }) {
   }
 
   return (
-    <View style={tw.style('flex-1 items-center justify-around bg-white')}>
+    <ScrollView contentContainerStyle={tw.style('flex-1 items-center justify-around bg-white')}>
       {/* loading state */}
       {!questionsData[questionIndex] && questionsData.length !== questionIndex && (
         <Text>...loading</Text>
@@ -122,6 +123,6 @@ export default function QuizScreen({ route, navigation }) {
       )}
 
       <StatusBar />
-    </View>
+    </ScrollView>
   );
 }

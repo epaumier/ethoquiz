@@ -1,7 +1,7 @@
 import { drizzle } from 'drizzle-orm/expo-sqlite';
 import { openDatabaseSync } from 'expo-sqlite/next';
 import { migrate } from 'drizzle-orm/expo-sqlite/migrator';
-import migrations from '../drizzle-sqlite/migrations';
+// import migrations from '../drizzle-sqlite/migrations';
 import { main } from './query';
 
 const sqlite = openDatabaseSync('sqlite.db');

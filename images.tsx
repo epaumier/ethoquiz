@@ -4,8 +4,6 @@ const images = {
   //     comments: require('./profile/comments.png'),
   // },
   catQuiz: [
-    '',
-    '',
     require('./assets/cat1.png'),
     require('./assets/cat2.png'),
     require('./assets/cat3.png'),
